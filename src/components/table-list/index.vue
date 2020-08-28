@@ -1,23 +1,38 @@
 <template>
-  <div class='mission-wrap'>
-    <tab @click='tabClick'></tab>
-    <search></search>
-    <page-tab>
-      <Table border :columns="columns1" :data="data1" class='mt20'>
-        <template slot-scope="{ row, index }" slot="action">
-            <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">办理</Button>
-        </template>
+  <div class='mt20'>
+    <slot>
+      <Table border :columns="columns" :data="data">
       </Table>
-    </page-tab>
+    </slot>
+    <div class='df' style='justify-content: center;'>
+      <Page class='mt20' :total="40" size="small" show-elevator show-sizer show-total />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Mission',
+  props: {
+    filterData: {
+      type: Object,
+      default: () => ({})
+    },
+    url: {
+      type: String,
+      default: ''
+    },
+    pageSize: {
+      type: Number,
+      default: 10
+    },
+    pageNum: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
-      columns1: [
+      columns: [
         {
           type: 'index',
           width: 70,
@@ -59,15 +74,9 @@ export default {
         {
           title: '流程状态',
           key: 'address'
-        },
-        {
-          title: '操作',
-          slot: 'action',
-          width: 70,
-          align: 'center'
         }
       ],
-      data1: [
+      data: [
         {
           name: 'John Brown',
           age: 18,
@@ -92,26 +101,32 @@ export default {
           address: 'Ottawa No. 2 Lake Park',
           date: '2016-10-04'
         }
-      ]
+      ],
+      pageData: []
     }
   },
-  components: {
-    Tab: () => import('./components/tab.vue'),
-    Search: () => import('./components/search.vue')
+  computed: {
+    tabFilter () {
+      return Object.assign({}, {pageSize, pageNum}, this.filterData)
+    }
   },
   methods: {
-    tabClick (item) {
-      console.log('item', item)
+    init () {
+      this.pageNum = 0
+      this.changePage()
+      this.pageData = []
     },
-    show (index) {
-      this.$Modal.info({
-        title: 'User Info',
-        content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
-      })
+    changePage (num) {
+      this.pageNum = num ? num : ++this.pageNum 
     },
-    remove (index) {
-      this.data6.splice(index, 1);
+    async getData () {
+      let res = await this.$axios.post(url, tabFilter)
+      this.$emit('listData', res)
     }
+  },
+  created () {
+    this.init()
+    // todo获取数据并emit出去
   }
 }
 </script>

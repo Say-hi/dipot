@@ -1,7 +1,8 @@
 <template>
   <div class="header-bar">
     <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange"></sider-trigger>
-    <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList"></custom-bread-crumb>
+    <!-- <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList"></custom-bread-crumb> -->
+    <Input v-model="projectName" icon="ios-search" placeholder="请输入项目名称" style="width: 200px; height: 64px;" />
     <div class="custom-content-con">
       <slot></slot>
     </div>
@@ -19,6 +20,11 @@ export default {
   },
   props: {
     collapsed: Boolean
+  },
+  data () {
+    return {
+      projectName: ''
+    }
   },
   computed: {
     breadCrumbList () {

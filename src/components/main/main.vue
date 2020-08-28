@@ -10,7 +10,7 @@
       </side-menu>
     </Sider>
     <Layout>
-      <Header class="header-con">
+      <Header class="header-con" style='padding-left: 0;'>
         <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
           <user :message-unread-count="unreadCount" :user-avatar="userAvatar"/>
           <!-- <language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/> -->
