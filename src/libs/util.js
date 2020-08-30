@@ -397,3 +397,18 @@ export const setTitle = (routeItem, vm) => {
   const resTitle = pageTitle ? `${title} - ${pageTitle}` : title
   window.document.title = resTitle
 }
+
+// 千位分隔符
+export const thousandBitSeparator = (num, toFixedBit = -1) => {
+  if (typeof num === 'number' && toFixedBit >= 0) {
+    num = num.toFixed(toFixedBit)
+  }
+  num += ''
+  let l = num.split('.')[0].split('').reverse()
+  let r = num.split('.')[1]
+  let t = ''
+  for (let i = 0; i < l.length; i++) {
+    t += l[i] + ((i + 1) % 3 === 0 && (i + 1) !== l.length ? ',' : '')
+  }
+  return t.split('').reverse().join('') + (r ? '.' + r : '')
+}

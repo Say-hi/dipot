@@ -48,37 +48,6 @@ export default [
     ]
   },
   {
-    path: '/argu',
-    name: 'argu',
-    meta: {
-      hideInMenu: true
-    },
-    component: Main,
-    children: [
-      {
-        path: 'params/:id',
-        name: 'params',
-        meta: {
-          icon: 'md-flower',
-          title: route => `{{ params }}-${route.params.id}`,
-          notCache: true,
-          beforeCloseName: 'before_close_normal'
-        },
-        component: () => import('@/view/argu-page/params.vue')
-      },
-      {
-        path: 'query',
-        name: 'query',
-        meta: {
-          icon: 'md-flower',
-          title: route => `{{ query }}-${route.query.id}`,
-          notCache: true
-        },
-        component: () => import('@/view/argu-page/query.vue')
-      }
-    ]
-  },
-  {
     path: '/401',
     name: 'error_401',
     meta: {
@@ -105,7 +74,7 @@ export default [
   {
     path: '/',
     name: '快捷菜单',
-    redirect: '/home',
+    redirect: '/todo',
     meta: {
       icon: 'logo-buffer',
       title: '快捷菜单'
@@ -120,7 +89,7 @@ export default [
           title: '首页',
           notCache: true
         },
-        component: () => import('@/view/single-page/home')
+        component: () => import('@/view/dashboard/index')
       },
       {
         path: 'todo',

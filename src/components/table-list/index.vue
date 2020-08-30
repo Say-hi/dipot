@@ -1,18 +1,49 @@
 <template>
-  <div class='mt20'>
+  <div
+    class='mt10'
+    style="position: relative;"
+  >
+    <Spin
+      v-if="showLoading"
+      fix
+      size="large"
+    >
+      <Icon type="ios-loading" size=18 class="demo-spin-icon-load"></Icon>
+      <div>内容加载中</div>
+    </Spin>
     <slot>
-      <Table border :columns="columns" :data="data">
-      </Table>
     </slot>
-    <div class='df' style='justify-content: center;'>
-      <Page class='mt20' :total="40" size="small" show-elevator show-sizer show-total />
+    <div
+      class='df'
+      style='justify-content: center;'
+    >
+      <Page
+        v-if="pageData.totalNum / pageData.pageSize > 1"
+        class='mt20'
+        :total="pageData.totalNum"
+        size="small"
+        show-elevator
+        show-sizer
+        show-total
+        :current.sync='pageNum'
+        @on-page-size-change='changeSize'
+        @on-change='changePage'
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { getPageData } from '_api/mission'
+
 export default {
+  name: 'TableList',
+  model: {
+    prop: 'custom',
+    event: 'disabledEvent'
+  },
   props: {
+    custom: {},
     filterData: {
       type: Object,
       default: () => ({})
@@ -21,112 +52,75 @@ export default {
       type: String,
       default: ''
     },
-    pageSize: {
+    size: {
       type: Number,
       default: 10
     },
-    pageNum: {
+    num: {
       type: Number,
-      default: 0
+      default: 1
+    },
+    auto: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      columns: [
-        {
-          type: 'index',
-          width: 70,
-          title: '序号',
-          align: 'center'
-        },
-        {
-          title: '任务类型',
-          key: 'name'
-        },
-        {
-          title: '流程标题',
-          key: 'age'
-        },
-        {
-          title: '流程类型',
-          key: 'address'
-        },
-        {
-          title: '办理节点',
-          key: 'address'
-        },
-        {
-          title: '发起人',
-          key: 'address'
-        },
-        {
-          title: '接收时间',
-          key: 'address'
-        },
-        {
-          title: '完成时间',
-          key: 'address'
-        },
-        {
-          title: '当前流程办理人',
-          key: 'address'
-        },
-        {
-          title: '流程状态',
-          key: 'address'
-        }
-      ],
-      data: [
-        {
-          name: 'John Brown',
-          age: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
-        },
-        {
-          name: 'Jim Green',
-          age: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
-        },
-        {
-          name: 'Joe Black',
-          age: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        }
-      ],
-      pageData: []
-    }
-  },
-  computed: {
-    tabFilter () {
-      return Object.assign({}, {pageSize, pageNum}, this.filterData)
+      showLoading: true,
+      pageSize: this.size,
+      pageNum: this.num,
+      pageData: {},
+      initStatus: true
     }
   },
   methods: {
-    init () {
-      this.pageNum = 0
-      this.changePage()
-      this.pageData = []
+    init (hold = false) {
+      this.initStatus = true
+      this.changePage(hold ? this.pageNum : 1)
+      this.changeSize(10)
+      this.getData()
     },
     changePage (num) {
-      this.pageNum = num ? num : ++this.pageNum 
+      this.pageNum = num
+    },
+    changeSize (num) {
+      this.pageSize = num
     },
     async getData () {
-      let res = await this.$axios.post(url, tabFilter)
-      this.$emit('listData', res)
+      this.$emit('disabledEvent', true)
+      this.showLoading = true
+      this.pageData = {}
+      let res = await getPageData(this.url, {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        ...this.filterData
+      })
+      this.pageData = res.data || {}
+      this.$emit('listData', this.pageData)
+      this.showLoading = false
+      this.initStatus = false
+      this.$emit('disabledEvent', false)
     }
   },
-  created () {
-    this.init()
-    // todo获取数据并emit出去
+  watch: {
+    pageSize () {
+      !this.initStatus && this.getData()
+    },
+    pageNum () {
+      !this.initStatus && this.getData()
+    }
   }
 }
 </script>
+
+<style scoped>
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
+</style>

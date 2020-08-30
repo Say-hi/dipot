@@ -14,8 +14,21 @@
         <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
           <user :message-unread-count="unreadCount" :user-avatar="userAvatar"/>
           <!-- <language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/> -->
+
           <error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader" :has-read="hasReadErrorPage" :count="errorCount"></error-store>
           <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
+          <a class="header-nav" href="http://mail.utrust.cn/" target="_blank">
+            <Icon type="md-analytics" /> 控股邮箱
+          </a>
+          <a class="header-nav" href="http://100.100.0.57/Login.aspx" target="_blank">
+            <Icon type="md-analytics" /> 系统档案
+          </a>
+          <a class="header-nav" href="http://dj.jiangwenqiang.com" target="_blank">
+            <Icon type="md-analytics" /> 共享文档
+          </a>
+          <a class="header-nav" href="http://dj.jiangwenqiang.com" target="_blank">
+            <Icon type="md-analytics" /> 数据驾驶舱
+          </a>
         </header-bar>
       </Header>
       <Content class="main-content-con">
@@ -174,7 +187,7 @@ export default {
     })
     this.setBreadCrumb(this.$route)
     // 设置初始语言
-    this.setLocal(this.$i18n.locale)
+    // this.setLocal(this.$i18n.locale)
     // 如果当前打开页面不在标签栏中，跳到homeName页
     if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
@@ -186,3 +199,12 @@ export default {
   }
 }
 </script>
+<style>
+  .header-nav {
+    height: 64px;
+    line-height: 64px;
+    color: #323232;
+    font-size: 16px;
+    margin-right: 20px;
+  }
+</style>

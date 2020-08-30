@@ -3,7 +3,7 @@
     <div
       v-for='item in tabs'
       :key='item.typee'
-      class='tabs-item dfc p20'
+      class='tabs-item dfc'
       :class='{active: activeType === item.type}'
       @click='tabChoose(item)'
     >
@@ -56,6 +56,10 @@ export default {
           type: 7
         }
       ])
+    },
+    outClick: {
+      type: Function,
+      default: function (item) {}
     }
   },
   data: () => ({
@@ -63,17 +67,23 @@ export default {
   }),
   methods: {
     tabChoose (item) {
-      this.$emit('click', item)
+      this._click(item)
       this.activeType = item.type
+    },
+    _click (item = this.tabs[0]) {
+      this.outClick(item)
+      this.$emit('click', item)
     }
   },
   mounted () {
-    this.activeType = this.tabs[2].type
+    this.activeType = this.tabs[0].type
+    this._click()
   }
 }
 </script>
 
 <style lang='less' scoped>
+@import url('~@/assets/styles/variable.less');
 .tabs {
   width: 100%;
 }
@@ -82,8 +92,11 @@ export default {
   flex: 1;
   align-items: center;
   padding-bottom: 0;
+  transition: all 0.3s;
+  border-bottom: 2px solid #fff;
   &.active {
-    border-bottom: 2px solid rgb(157, 154, 154);
+    border-bottom-color: rgb(157, 154, 154);
+    color: $mainColor;
   }
   &:hover {
     background: #eee;

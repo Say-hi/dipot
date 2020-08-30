@@ -1,11 +1,53 @@
 <template>
   <div class='mission-wrap'>
-    <tab @click='tabClick'></tab>
-    <search></search>
-    <page-tab>
-      <Table border :columns="columns1" :data="data1" class='mt20'>
-        <template slot-scope="{ row, index }" slot="action">
-            <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">办理</Button>
+    <tab :outClick='_tabClick'></tab>
+    <search :disabled="disabled" :outClick="_searchClick" ref='search'></search>
+    <page-tab
+      v-model="disabled"
+      :url="url"
+      :filter-data="filterData"
+      @listData="_listData"
+      ref="pageTab"
+    >
+      <Row :gutter="16">
+        <Col :span="2">
+          <Button :disabled="disabled" type="primary">新建流程</Button>
+        </Col>
+        <Col :span="1">
+          <Button :disabled="disabled" type="primary">导出</Button>
+        </Col>
+      </Row>
+      <Table
+        v-if="pageData.lists"
+        border
+        stripe
+        no-data-text="暂无相关数据"
+        :columns="columns"
+        :data="pageData.lists"
+        class='mt20'
+      >
+        <template
+          slot-scope="{ index }"
+          slot="action"
+        >
+            <Button
+              type="primary"
+              size="small"
+              style="margin-right: 5px"
+              @click="_show(index)"
+            >办理</Button>
+<!--          <Button-->
+<!--            type="error"-->
+<!--            size="small"-->
+<!--            style="margin-right: 5px"-->
+<!--            @click="_show(index)"-->
+<!--          >撤回</Button>-->
+<!--          <Button-->
+<!--            type="info"-->
+<!--            size="small"-->
+<!--            style="margin-right: 5px"-->
+<!--            @click="_show(index)"-->
+<!--          >重新发起</Button>-->
         </template>
       </Table>
     </page-tab>
@@ -15,102 +57,91 @@
 <script>
 export default {
   name: 'Mission',
-  data () {
-    return {
-      columns1: [
-        {
-          type: 'index',
-          width: 70,
-          title: '序号',
-          align: 'center'
-        },
-        {
-          title: '任务类型',
-          key: 'name'
-        },
-        {
-          title: '流程标题',
-          key: 'age'
-        },
-        {
-          title: '流程类型',
-          key: 'address'
-        },
-        {
-          title: '办理节点',
-          key: 'address'
-        },
-        {
-          title: '发起人',
-          key: 'address'
-        },
-        {
-          title: '接收时间',
-          key: 'address'
-        },
-        {
-          title: '完成时间',
-          key: 'address'
-        },
-        {
-          title: '当前流程办理人',
-          key: 'address'
-        },
-        {
-          title: '流程状态',
-          key: 'address'
-        },
-        {
-          title: '操作',
-          slot: 'action',
-          width: 70,
-          align: 'center'
-        }
-      ],
-      data1: [
-        {
-          name: 'John Brown',
-          age: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
-        },
-        {
-          name: 'Jim Green',
-          age: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
-        },
-        {
-          name: 'Joe Black',
-          age: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        }
-      ]
-    }
-  },
+  data: () => ({
+    url: '/getMissionData',
+    filterData: {},
+    columns: [
+      {
+        type: 'index',
+        width: 70,
+        title: '序号',
+        align: 'center'
+      },
+      {
+        title: '任务类型',
+        key: 'mission_type',
+        width: 100,
+        align: 'center'
+      },
+      {
+        title: '流程标题',
+        key: 'title',
+        width: 250,
+        resizable: true
+      },
+      {
+        title: '流程类型',
+        key: 'progress_type'
+      },
+      {
+        title: '办理节点',
+        key: 'point'
+      },
+      {
+        title: '发起人',
+        key: 'people'
+      },
+      {
+        title: '接收时间',
+        key: 'start_time',
+        width: 170
+      },
+      {
+        title: '完成时间',
+        key: 'finish_time',
+        width: 170
+      },
+      {
+        title: '当前流程办理人',
+        key: 'point_people'
+      },
+      {
+        title: '流程状态',
+        key: 'progress_status'
+      },
+      {
+        title: '操作',
+        slot: 'action',
+        width: 80,
+        align: 'center'
+      }
+    ],
+    pageData: '',
+    disabled: true
+  }),
   components: {
     Tab: () => import('./components/tab.vue'),
     Search: () => import('./components/search.vue')
   },
   methods: {
-    tabClick (item) {
-      console.log('item', item)
-    },
-    show (index) {
+    _show (index) {
       this.$Modal.info({
         title: 'User Info',
-        content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
+        content: `${index}`
       })
     },
-    remove (index) {
-      this.data6.splice(index, 1);
+    _listData (data) {
+      this.pageData = data
+    },
+    _tabClick (item) {
+      this.filterData.type = item.type
+      this.$refs.pageTab.init()
+    },
+    _searchClick (item) {
+      this.filterData = Object.assign({}, this.filterData, item)
+      this.$nextTick(() => {
+        this.$refs.pageTab.init()
+      })
     }
   }
 }
