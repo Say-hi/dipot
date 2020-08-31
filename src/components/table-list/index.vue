@@ -1,14 +1,11 @@
 <template>
-  <div
-    class='mt10'
-    style="position: relative;"
-  >
+  <div style='position: relative;'>
     <Spin
-      v-if="showLoading"
+      v-if='showLoading'
       fix
-      size="large"
+      size='large'
     >
-      <Icon type="ios-loading" size=18 class="demo-spin-icon-load"></Icon>
+      <Icon type='ios-loading' size=18 class='demo-spin-icon-load'></Icon>
       <div>内容加载中</div>
     </Spin>
     <slot>
@@ -18,13 +15,13 @@
       style='justify-content: center;'
     >
       <Page
-        v-if="pageData.totalNum / pageData.pageSize > 1"
-        class='mt20'
-        :total="pageData.totalNum"
-        size="small"
-        show-elevator
-        show-sizer
-        show-total
+        v-if='pageData.totalNum / pageData.pageSize > 1'
+        class='mt10'
+        :total='pageData.totalNum'
+        size='small'
+        :show-elevator='pageControl === "noraml"'
+        :show-sizer='pageControl === "noraml"'
+        :show-total='pageControl === "noraml"'
         :current.sync='pageNum'
         @on-page-size-change='changeSize'
         @on-change='changePage'
@@ -63,6 +60,10 @@ export default {
     auto: {
       type: Boolean,
       default: false
+    },
+    pageControl: {
+      type: String,
+      default: 'normal'
     }
   },
   data () {
@@ -78,7 +79,7 @@ export default {
     init (hold = false) {
       this.initStatus = true
       this.changePage(hold ? this.pageNum : 1)
-      this.changeSize(10)
+      this.changeSize(this.size)
       this.getData()
     },
     changePage (num) {

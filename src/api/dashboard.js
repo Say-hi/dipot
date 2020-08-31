@@ -6,3 +6,10 @@ export const getReportData = () => {
     method: 'post'
   })
 }
+
+export const getUserData = () => {
+  return axios.request({
+    url: '/dashboard/user',
+    method: 'post'
+  })
+}

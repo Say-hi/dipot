@@ -5,6 +5,13 @@
   display: flex;
   flex-direction: column;
 }
+.dfac {
+  align-items: center;
+}
+.dfb {
+  justify-content: space-between;
+}
+
 .pr {
   position: relative;
 }
@@ -23,8 +30,14 @@
 .mt20 {
   margin-top: 20px;
 }
+.m010 {
+  margin: 0 10px;
+}
 .ml10 {
   margin-left: 10px;
+}
+.mr10 {
+  margin-right: 10px;
 }
 
 .p10 {
@@ -33,7 +46,20 @@
 .p20 {
   padding: 20px;
 }
+.p50 {
+  padding: 5px 0;
+}
 
 .bd2 {
   border-bottom: 2px solid #eee;
 }
+
+
+.fontSize(@count) when (@count >= 10) {
+  .f@{count} {
+    font-size: (1px * @count);
+  }
+  .fontSize((@count - 1))
+}
+
+.fontSize(30);

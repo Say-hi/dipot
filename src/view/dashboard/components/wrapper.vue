@@ -1,13 +1,13 @@
 <template>
-  <div class="wrapper">
-    <div class="top df p10">
-      <h4 class="title">{{ this.title }}</h4>
+  <div class='wrapper'>
+    <div class='top df p10'>
+      <h4 class='title'>{{ this.title }}</h4>
       <div>
-        <slot name="top"></slot>
+        <slot name='top'></slot>
         <Button>查看更多</Button>
       </div>
     </div>
-    <div class="content p10">
+    <div class='content p10'>
       <slot></slot>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang='less' scoped>
   .wrapper {
     border: 1px solid #eee;
     border-radius: 5px;

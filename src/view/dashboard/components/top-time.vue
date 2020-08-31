@@ -1,6 +1,6 @@
 <template>
   <div class='top'>
-    <h3 class="top-left">工作台</h3>{{this.$store.state.user.userName}}，您好，今天是{{ solarDate }}~
+    <h3 class='top-left'>工作台</h3>{{this.$store.state.user.userName}}，您好，今天是{{ solarDate }}~
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang='less' scoped>
   .top {
     display: flex;
     align-items: center;

@@ -26,34 +26,45 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      let legend = this.value.map(_ => _.name)
+      // let legend = this.value.map(_ => _.name)
       let option = {
         title: {
           text: this.text,
           subtext: this.subtext,
-          x: 'center'
+          x: 'center',
+          top: '0',
+          textStyle: {
+            fontSize: 12
+          }
         },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: legend
-        },
         series: [
           {
+            name: this.text,
             type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
+            radius: '80%',
+            center: ['50%', '50%'],
             data: this.value,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
-                shadowOffsetX: 0,
+                shadowOffsetX: 10,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
               }
+            },
+            animationType: 'scale',
+            animationEasing: 'elasticOut',
+            animationDelay: function (idx) {
+              return Math.random() * 200
+            },
+            label: {
+              show: false
+            },
+            lableLine: {
+              show: false
             }
           }
         ]

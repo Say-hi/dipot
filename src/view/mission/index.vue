@@ -1,52 +1,53 @@
 <template>
   <div class='mission-wrap'>
     <tab :outClick='_tabClick'></tab>
-    <search :disabled="disabled" :outClick="_searchClick" ref='search'></search>
+    <search :disabled='disabled' :outClick='_searchClick' ref='search'></search>
     <page-tab
-      v-model="disabled"
-      :url="url"
-      :filter-data="filterData"
-      @listData="_listData"
-      ref="pageTab"
+      v-model='disabled'
+      :url='url'
+      :filter-data='filterData'
+      @listData='_listData'
+      ref='pageTab'
+      class='mt10'
     >
-      <Row :gutter="16">
-        <Col :span="2">
-          <Button :disabled="disabled" type="primary">新建流程</Button>
+      <Row :gutter='16'>
+        <Col :span='2'>
+          <Button :disabled='disabled' type='primary'>新建流程</Button>
         </Col>
-        <Col :span="1">
-          <Button :disabled="disabled" type="primary">导出</Button>
+        <Col :span='1'>
+          <Button :disabled='disabled' type='primary'>导出</Button>
         </Col>
       </Row>
       <Table
-        v-if="pageData.lists"
+        v-if='pageData.lists'
         border
         stripe
-        no-data-text="暂无相关数据"
-        :columns="columns"
-        :data="pageData.lists"
-        class='mt20'
+        no-data-text='暂无相关数据'
+        :columns='columns'
+        :data='pageData.lists'
+        class='mt10'
       >
         <template
-          slot-scope="{ index }"
-          slot="action"
+          slot-scope='{ index }'
+          slot='action'
         >
             <Button
-              type="primary"
-              size="small"
-              style="margin-right: 5px"
-              @click="_show(index)"
+              type='primary'
+              size='small'
+              style='margin-right: 5px'
+              @click='_show(index)'
             >办理</Button>
 <!--          <Button-->
-<!--            type="error"-->
-<!--            size="small"-->
-<!--            style="margin-right: 5px"-->
-<!--            @click="_show(index)"-->
+<!--            type='error'-->
+<!--            size='small'-->
+<!--            style='margin-right: 5px'-->
+<!--            @click='_show(index)'-->
 <!--          >撤回</Button>-->
 <!--          <Button-->
-<!--            type="info"-->
-<!--            size="small"-->
-<!--            style="margin-right: 5px"-->
-<!--            @click="_show(index)"-->
+<!--            type='info'-->
+<!--            size='small'-->
+<!--            style='margin-right: 5px'-->
+<!--            @click='_show(index)'-->
 <!--          >重新发起</Button>-->
         </template>
       </Table>

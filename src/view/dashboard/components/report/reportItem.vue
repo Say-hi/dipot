@@ -1,10 +1,10 @@
 <template>
-  <div class="wrapper m5" v-if="content.length">
-    <div v-for="(item, index) in content" :key="item.title" class="wrapper-item df" :class="{mt10: index > 0}">
-      <Icon :size="28" :type="item.type || 'md-menu'" />
-      <div class="ml10 flex1">
-        <p class="bd1">{{ item.title }}</p>
-        <p>{{ item.money ? money(item.money) : item.count }}</p>
+  <div class='wrapper m5' v-if='content.length'>
+    <div v-for='(item, index) in content' :key='item.title' class='wrapper-item df' :class='{mt10: index > 0}'>
+      <Icon :size='28' :type='item.type || "md-menu"' />
+      <div class='ml10 flex1'>
+        <p class='bd1 p50'>{{ item.title }}</p>
+        <p class='p50'>{{ item.money ? money(item.money) : item.count }}</p>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang='less' scoped>
 .wrapper {
   border: 1px solid #eee;
   padding: 5px;
