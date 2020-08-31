@@ -7,6 +7,7 @@
       pageControl='simple'
       ref='pageTab'
     >
+      <div v-if='!list' style='height: 80px;'></div>
       <div
         v-for='item of list'
         :key='item.id'

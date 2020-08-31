@@ -1,21 +1,21 @@
 <template>
-  <div class='df dfac dfb'>
-    <div>
-      <p>股权项目总数（个）</p>
+  <div class='df dfac'>
+    <div class='flex1 tac'>
+      <p >股权项目总数（个）</p>
       <count-to
         class='f30'
         :end='1231231'
-        :usegroup='true'
+        usegroup
       ></count-to>
     </div>
-    <div>
+    <div class='flex1'>
       <Pie
         style='height: 200px; width: 200px;'
         :value='department'
         text='投资部门分布(个数)'
       />
     </div>
-    <div>
+    <div class='flex1'>
       <Pie
         style='height: 200px; width: 200px;'
         :value='plate'
@@ -38,15 +38,15 @@ export default {
     return {
       department: [
         { value: 335, name: '投资一部' },
-        { value: 310, name: '投资二部' },
-        { value: 234, name: '投资三部' },
-        { value: 135, name: '投资四部' }
+        { value: 456, name: '投资二部' },
+        { value: 4567, name: '投资三部' },
+        { value: 123, name: '投资四部' }
       ],
       plate: [
-        { value: 335, name: '消费行业' },
-        { value: 310, name: '5G' },
-        { value: 234, name: '新能源' },
-        { value: 135, name: '光伏能源' }
+        { value: 1234, name: '消费行业' },
+        { value: 2, name: '5G' },
+        { value: 423, name: '新能源' },
+        { value: 123, name: '光伏能源' }
       ]
     }
   }

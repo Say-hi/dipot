@@ -21,6 +21,18 @@
           <Col :span='12'><NoticeAnnouncement /></Col>
           <Col :span='12'><CommonProgress/></Col>
         </Row>
+        <Row>
+          <Alarm />
+        </Row>
+        <Row>
+          <Meeting />
+        </Row>
+        <Row>
+          <CompanySystem />
+        </Row>
+        <Row>
+          <CompanyNews />
+        </Row>
       </Col>
     </Row>
   </div>
@@ -34,6 +46,10 @@ import Follow from './components/follow/follow'
 import NoticeAnnouncement from './components/notice/notice'
 import CommonProgress from './components/commonProgress/commonProgress'
 import EquityProject from './components/equityProject/equityProject'
+import Alarm from './components/alarm/alarm'
+import Meeting from './components/meeting/meeting'
+import CompanySystem from './components/companySystem/companySystem'
+import CompanyNews from './components/companyNews/companyNews'
 export default {
   name: 'Dashboard',
   components: {
@@ -43,7 +59,11 @@ export default {
     Follow,
     NoticeAnnouncement,
     CommonProgress,
-    EquityProject
+    EquityProject,
+    Alarm,
+    Meeting,
+    CompanySystem,
+    CompanyNews
   }
 }
 </script>

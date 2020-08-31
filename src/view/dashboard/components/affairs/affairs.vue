@@ -4,7 +4,7 @@
       <template #top>
         <Button class='mr10'>新建流程</Button>
       </template>
-      <ArrairsTop @select='_select' />
+      <AffairsTop @select='_select' />
       <page-tab
         :url='url'
         :size='5'
@@ -28,7 +28,7 @@
 
 <script>
 import Wrapper from '../wrapper'
-import ArrairsTop from './ArrairsTop'
+import AffairsTop from './AffairsTop'
 
 export default {
   name: 'Affairs',
@@ -40,7 +40,7 @@ export default {
   },
   components: {
     Wrapper,
-    ArrairsTop
+    AffairsTop
   },
   data () {
     return {
@@ -66,7 +66,7 @@ export default {
         },
         {
           title: '发起人',
-          key: 'people',
+          key: 'people'
         },
         {
           title: '经办人',

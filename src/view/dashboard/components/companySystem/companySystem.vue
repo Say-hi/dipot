@@ -1,9 +1,6 @@
 <template>
   <div>
-    <wrapper title='通知公告'>
-      <template #top>
-        <Button class='mr10'>发布公告</Button>
-      </template>
+    <wrapper title='公司制度'>
       <page-tab
         :size='5'
         :url='url'
@@ -28,7 +25,7 @@
 <script>
 import Wrapper from '../wrapper'
 export default {
-  name: 'NoticeAndAnnouncement',
+  name: 'CompanySystem',
   components: {
     Wrapper
   },

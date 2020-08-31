@@ -74,7 +74,7 @@ export default [
   {
     path: '/',
     name: '快捷菜单',
-    redirect: '/todo',
+    redirect: '/home',
     meta: {
       icon: 'logo-buffer',
       title: '快捷菜单'

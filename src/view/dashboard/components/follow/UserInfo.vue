@@ -3,7 +3,7 @@
     <div class='df dfac m010'>
       <Avatar :src='userInfo.avatar' />
       <span class='m010 flex1'>{{ userInfo.name }}</span>
-      <Icon 
+      <Icon
         class='eyes'
         @click="show = !show"
         size='28'
@@ -63,5 +63,8 @@ export default {
 .user-money {
   flex-wrap: wrap;
   white-space: nowrap;
+}
+.flex1 {
+  flex: 50%;
 }
 </style>
