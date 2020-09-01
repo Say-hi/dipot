@@ -124,3 +124,25 @@ export const getDashboardNoticeAndAnnouncement = req => {
     pageSize: body.pageSize
   }
 }
+
+export const getDashboardAlarm = req => {
+  let body = JSON.parse(req.body)
+  let data = []
+  doCustomTimes(body.pageSize, () => {
+    data.push(Mock.mock({
+      status: Random.natural(1, 3),
+      title: `${Random.name()}项目`,
+      point: '投资一部',
+      people: Random.cname(),
+      time: Random.date('yyyy-MM-dd'),
+      id: Random.natural()
+    }))
+  })
+  return {
+    lists: data,
+    totalPage: Random.natural(1, 10),
+    totalNum: Random.natural(1, 100),
+    pageNum: body.pageNum,
+    pageSize: body.pageSize
+  }
+}

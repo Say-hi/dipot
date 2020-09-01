@@ -28,14 +28,13 @@
         class='mt10'
       >
         <template
-          slot-scope='{ index }'
-          slot='action'
+          #action='{row}'
         >
             <Button
               type='primary'
               size='small'
               style='margin-right: 5px'
-              @click='_show(index)'
+              @click='_show(row)'
             >办理</Button>
 <!--          <Button-->
 <!--            type='error'-->
@@ -125,10 +124,19 @@ export default {
     Search: () => import('./components/search.vue')
   },
   methods: {
-    _show (index) {
-      this.$Modal.info({
-        title: 'User Info',
-        content: `${index}`
+    _show (row) {
+      // this.$Modal.info({
+      //   title: 'User Info',
+      //   content: `${index}`
+      // })
+      this.$router.push({
+        name: 'progressDetail',
+        params: {
+          id: row.id
+        },
+        query: {
+          title: row.title
+        }
       })
     },
     _listData (data) {

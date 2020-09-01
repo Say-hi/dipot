@@ -4,15 +4,12 @@
 
 <script>
 import echarts from 'echarts'
-import tdTheme from './theme.json'
 import { on, off } from '@/libs/tools'
-echarts.registerTheme('tdTheme', tdTheme)
 export default {
-  name: 'ChartPie',
+  name: 'FundPie',
   props: {
     value: Array,
-    text: String,
-    subtext: String
+    text: String
   },
   data () {
     return {
@@ -22,32 +19,51 @@ export default {
   methods: {
     resize () {
       this.dom.resize()
+    },
+    getText (name) {
+      let all = 0
+      let temp = this.value.filter(item => {
+        if (item.name === name) return item
+      })[0]
+      this.value.forEach(item => {
+        all += +item.value
+      })
+      return `${name} ${temp.value}只 ${(temp.value / all * 100).toFixed(2)}%`
     }
   },
   mounted () {
     this.$nextTick(() => {
-      // let legend = this.value.map(_ => _.name)
       let option = {
         title: {
           text: this.text,
-          subtext: this.subtext,
           x: 'center',
           top: '0',
           textStyle: {
-            fontSize: 12
+            fontSize: 25
           }
         },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
-        // legend: this.legend,
+        legend: [
+          {
+            left: '40%',
+            y: 'center',
+            data: this.value.map(item => item.name),
+            formatter: (name) => {
+              return this.getText(name)
+            },
+            itemGap: 30,
+            icon: 'roundRect'
+          }
+        ],
         series: [
           {
             name: this.text,
             type: 'pie',
             radius: '80%',
-            center: ['50%', '50%'],
+            center: ['20%', '52%'],
             data: this.value,
             itemStyle: {
               emphasis: {
@@ -70,7 +86,7 @@ export default {
           }
         ]
       }
-      this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+      this.dom = echarts.init(this.$refs.dom)
       this.dom.setOption(option)
       on(window, 'resize', this.resize)
     })

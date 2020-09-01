@@ -138,6 +138,7 @@ export default {
         window.open(name.split('_')[1])
         return
       }
+      if (this.$router.app.$route.name === name) return
       this.$router.push({
         name,
         params,

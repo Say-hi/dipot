@@ -47,8 +47,14 @@
 .p50 {
   padding: 5px 0;
 }
+.bd1 {
+  border-bottom: 1px solid #eee;
+}
 .bd2 {
   border-bottom: 2px solid #eee;
+}
+.tr5 {
+  transition: all 0.5s;
 }
 .f30 {
   font-size: 30px;

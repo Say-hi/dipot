@@ -4,7 +4,12 @@
       <Icon :size='28' :type='item.type || "md-menu"' />
       <div class='ml10 flex1'>
         <p class='bd1 p50'>{{ item.title }}</p>
-        <p class='p50'>{{ item.money ? money(item.money) : item.count }}</p>
+        <!-- <p class='p50'>{{ item.money ? money(item.money) : item.count }}</p> -->
+        <CountTo
+          class='p50'
+          :end='item.money || item.count'
+          usegroup
+         />
       </div>
     </div>
   </div>
@@ -12,8 +17,12 @@
 
 <script>
 import { thousandBitSeparator } from '@/libs/util'
+import CountTo from '@/components/count-to'
 export default {
   name: 'ReportItem',
+  components: {
+    CountTo
+  },
   props: {
     content: {
       type: Array,

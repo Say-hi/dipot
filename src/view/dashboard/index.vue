@@ -21,16 +21,16 @@
           <Col :span='12'><NoticeAnnouncement /></Col>
           <Col :span='12'><CommonProgress/></Col>
         </Row>
-        <Row>
+        <Row class='mt10'>
           <Alarm />
         </Row>
-        <Row>
+        <Row class='mt10'>
           <Meeting />
         </Row>
-        <Row>
+        <Row class='mt10'>
           <CompanySystem />
         </Row>
-        <Row>
+        <Row class='mt10'>
           <CompanyNews />
         </Row>
       </Col>

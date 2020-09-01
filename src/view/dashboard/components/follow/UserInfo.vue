@@ -12,29 +12,61 @@
     <div class='df user-money f12 m010'>
       <div class='flex1 dfc mt10'>
         <span>累计认购申请金额（元）</span>
-        <span class='f18'>{{ show ? _fixMoney(userInfo.offerToBuy) : '*****' }}</span>
+        <CountTo
+          class='f18'
+          v-show='show'
+          :end='userInfo.offerToBuy || 0 '
+          :decimals='2'
+          usegroup
+         />
+        <span v-show='!show' class='f18'>*****</span>
       </div>
       <div class='flex1 dfc mt10'>
         <span>累计跟投金额（元）</span>
-        <span class='f18'>{{ show ? _fixMoney(userInfo.carry) : '*****' }}</span>
+        <CountTo
+          class='f18'
+          v-show='show'
+          :end='userInfo.carry || 0 '
+          :decimals='2'
+          usegroup
+         />
+        <span v-show='!show' class='f18'>*****</span>
       </div>
       <div class='flex1 dfc mt10'>
         <span>累计股权转让金额（元）</span>
-        <span class='f18'>{{ show ? _fixMoney(userInfo.stockRight) : '*****' }}</span>
+        <CountTo
+          class='f18'
+          v-show='show'
+          :end='userInfo.stockRight || 0 '
+          :decimals='2'
+          usegroup
+         />
+        <span v-show='!show' class='f18'>*****</span>
       </div>
       <div class='flex1 dfc mt10'>
         <span>累计收益分配金额（元）</span>
-        <span class='f18'>{{ show ? _fixMoney(userInfo.profit) : '*****' }}</span>
+        <CountTo
+          class='f18'
+          v-show='show'
+          :end='userInfo.profit || 0 '
+          :decimals='2'
+          usegroup
+         />
+        <span v-show='!show' class='f18'>*****</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import CountTo from '@/components/count-to'
 import { thousandBitSeparator } from '@/libs/util'
 import { getUserData } from '@/api/dashboard'
 export default {
   name: 'UserInfo',
+  components: {
+    CountTo
+  },
   data () {
     return {
       show: true,

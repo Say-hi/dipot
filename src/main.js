@@ -8,6 +8,7 @@ import store from './store'
 import iView from 'view-design'
 // import i18n from '@/locale'
 import config from '@/config'
+import axios from '@/libs/api.request'
 import importDirective from '@/directive'
 import { directive as clickOutside } from 'v-click-outside-x'
 import installPlugin from '@/plugin'
@@ -36,6 +37,7 @@ Vue.config.productionTip = false
  * @description 全局注册应用配置
  */
 Vue.prototype.$config = config
+Vue.prototype.$axios = axios
 /**
  * 注册指令
  */

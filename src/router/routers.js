@@ -73,7 +73,7 @@ export default [
   },
   {
     path: '/',
-    name: '快捷菜单',
+    name: '_home',
     redirect: '/home',
     meta: {
       icon: 'logo-buffer',
@@ -92,18 +92,19 @@ export default [
         component: () => import('@/view/dashboard/index')
       },
       {
-        path: 'todo',
-        name: '待办任务',
+        path: '/todo',
+        name: '_todo',
+        redirect: 'worker/todo',
         meta: {
           icon: 'md-funnel',
           title: '待办任务',
-          notCache: true
-        },
-        component: () => import('@/view/mission/index.vue')
+          notCache: false
+        }
+        // component: () => import('@/view/mission/index.vue')
       },
       {
         path: 'equityFund',
-        name: '股权基金',
+        name: 'equityFund',
         meta: {
           icon: 'md-funnel',
           title: '股权基金',
@@ -113,7 +114,7 @@ export default [
       },
       {
         path: 'equityProect',
-        name: '股权项目',
+        name: 'equityProect',
         meta: {
           icon: 'md-funnel',
           title: '股权项目',
@@ -123,7 +124,7 @@ export default [
       },
       {
         path: 'fixedIncomeFund',
-        name: '固收基金',
+        name: 'fixedIncomeFund',
         meta: {
           icon: 'md-funnel',
           title: '固收基金',
@@ -133,7 +134,7 @@ export default [
       },
       {
         path: 'fixedIncomeProject',
-        name: '固收项目',
+        name: 'fixedIncomeProject',
         meta: {
           icon: 'md-funnel',
           title: '固收项目',
@@ -143,7 +144,7 @@ export default [
       },
       {
         path: 'projectRisk',
-        name: '项目风险',
+        name: 'projectRisk',
         meta: {
           icon: 'md-funnel',
           title: '项目风险',
@@ -153,7 +154,7 @@ export default [
       },
       {
         path: 'mineRights',
-        name: '我的权益',
+        name: 'mineRights',
         meta: {
           icon: 'md-funnel',
           title: '我的权益',
@@ -165,7 +166,7 @@ export default [
   },
   {
     path: '/worker',
-    name: '工作台',
+    name: 'worker',
     meta: {
       icon: 'md-menu',
       title: '工作台'
@@ -174,49 +175,59 @@ export default [
     children: [
       {
         path: 'todo',
-        name: '待办任务 ',
+        name: 'todo',
         meta: {
           icon: 'md-funnel',
           title: '待办任务',
-          notCache: true
+          notCache: false
         },
-        component: () => import('@/view/multilevel/level-2-1.vue')
+        component: () => import('@/view/mission/index.vue')
       },
+      // {
+      //   path: 'doNoFinishMssion',
+      //   name: 'doNoFinishMssion',
+      //   meta: {
+      //     icon: 'md-funnel',
+      //     title: '已办未完结任务',
+      //     notCache: true
+      //   },
+      //   component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+      // },
+      // {
+      //   path: 'finishMission',
+      //   name: 'finishMission',
+      //   meta: {
+      //     icon: 'md-funnel',
+      //     title: '已完结任务',
+      //     notCache: true
+      //   },
+      //   component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+      // },
+      // {
+      //   path: 'allMission',
+      //   name: 'allMission',
+      //   meta: {
+      //     icon: 'md-funnel',
+      //     title: '全部任务',
+      //     notCache: true
+      //   },
+      //   component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+      // },
       {
-        path: 'doNoFinishMssion',
-        name: '已办未完结任务',
+        path: 'progressdetail/:id',
+        name: 'progressDetail',
         meta: {
-          icon: 'md-funnel',
-          title: '已办未完结任务',
-          notCache: true
+          hideInMenu: true,
+          notCache: true,
+          title: '流程详情'
         },
-        component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
-      },
-      {
-        path: 'finishMission',
-        name: '已完结任务',
-        meta: {
-          icon: 'md-funnel',
-          title: '已完结任务',
-          notCache: true
-        },
-        component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
-      },
-      {
-        path: 'allMission',
-        name: '全部任务',
-        meta: {
-          icon: 'md-funnel',
-          title: '全部任务',
-          notCache: true
-        },
-        component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+        component: () => import('@/view/mission/progressDetail.vue')
       }
     ]
   },
   {
     path: '/stockRight',
-    name: '股权业务',
+    name: 'stockRight',
     meta: {
       icon: 'md-menu',
       title: '股权业务'
@@ -225,17 +236,17 @@ export default [
     children: [
       {
         path: 'analysis',
-        name: '业务数据分析',
+        name: 'analysis',
         meta: {
           icon: 'md-funnel',
           title: '业务数据分析',
           notCache: true
         },
-        component: () => import('@/view/single-page/home')
+        component: () => import('@/view/stockRight/analysis.vue')
       },
       {
         path: 'fundBank',
-        name: '股权基金库',
+        name: 'fundBank',
         meta: {
           icon: 'md-funnel',
           title: '股权基金库',
@@ -245,7 +256,7 @@ export default [
       },
       {
         path: 'projectBank',
-        name: '股权项目库',
+        name: 'projectBank',
         meta: {
           icon: 'md-funnel',
           title: '股权项目库',
@@ -255,7 +266,7 @@ export default [
       },
       {
         path: 'report',
-        name: '股权业务报告',
+        name: 'report',
         meta: {
           icon: 'md-funnel',
           title: '股权业务报告',
@@ -265,7 +276,7 @@ export default [
       },
       {
         path: 'file',
-        name: '股权业务文件',
+        name: 'file',
         meta: {
           icon: 'md-funnel',
           title: '股权业务文件',
@@ -275,7 +286,7 @@ export default [
       },
       {
         path: 'manuscript',
-        name: '股权工作底稿',
+        name: 'manuscript',
         meta: {
           icon: 'md-funnel',
           title: '股权工作底稿',
@@ -285,7 +296,7 @@ export default [
       },
       {
         path: 'flowPath',
-        name: '股权业务流程',
+        name: 'flowPath',
         meta: {
           icon: 'md-funnel',
           title: '股权业务流程',
@@ -297,7 +308,7 @@ export default [
   },
   {
     path: '/fixedIncomeMission',
-    name: '固收业务',
+    name: 'fixedIncomeMission',
     meta: {
       icon: 'md-menu',
       title: '固收业务'
@@ -306,7 +317,7 @@ export default [
     children: [
       {
         path: 'allOrder',
-        name: '全部订单',
+        name: 'allOrder',
         meta: {
           icon: 'md-funnel',
           title: '全部订单',
@@ -316,7 +327,7 @@ export default [
       },
       {
         path: 'mineOrder',
-        name: '我的订单',
+        name: 'mineOrder',
         meta: {
           icon: 'md-funnel',
           title: '我的订单',
@@ -326,7 +337,7 @@ export default [
       },
       {
         path: 'subordinateOrder',
-        name: '下属订单',
+        name: 'subordinateOrder',
         meta: {
           icon: 'md-funnel',
           title: '下属订单',
@@ -336,7 +347,7 @@ export default [
       },
       {
         path: 'mineCooperation',
-        name: '我协作的',
+        name: 'mineCooperation',
         meta: {
           icon: 'md-funnel',
           title: '我协作的',
@@ -346,7 +357,7 @@ export default [
       },
       {
         path: 'subordinateCooperation',
-        name: '下属协作',
+        name: 'subordinateCooperation',
         meta: {
           icon: 'md-funnel',
           title: '下属协作',
@@ -356,7 +367,7 @@ export default [
       },
       {
         path: 'addOrder',
-        name: '添加订单',
+        name: 'addOrder',
         meta: {
           icon: 'md-funnel',
           title: '添加订单',
@@ -368,7 +379,7 @@ export default [
   },
   {
     path: '/riskControlManagement',
-    name: '风控管理',
+    name: 'riskControlManagement',
     meta: {
       icon: 'md-menu',
       title: '风控管理'
@@ -377,7 +388,7 @@ export default [
     children: [
       {
         path: 'collectionOfPaymentPlan',
-        name: '回款计划',
+        name: 'collectionOfPaymentPlan',
         meta: {
           icon: 'md-funnel',
           title: '回款计划',
@@ -387,7 +398,7 @@ export default [
       },
       {
         path: 'collectionOfPayment',
-        name: '回款管理',
+        name: 'collectionOfPayment',
         meta: {
           icon: 'md-funnel',
           title: '回款管理',
@@ -397,7 +408,7 @@ export default [
       },
       {
         path: 'invoice',
-        name: '发票管理',
+        name: 'invoice',
         meta: {
           icon: 'md-funnel',
           title: '发票管理',
@@ -407,7 +418,7 @@ export default [
       },
       {
         path: 'expenses',
-        name: '费用管理',
+        name: 'expenses',
         meta: {
           icon: 'md-funnel',
           title: '费用管理',
@@ -417,7 +428,7 @@ export default [
       },
       {
         path: 'reimburse',
-        name: '报销管理',
+        name: 'reimburse',
         meta: {
           icon: 'md-funnel',
           title: '报销管理',
@@ -429,7 +440,7 @@ export default [
   },
   {
     path: '/postInvestmentManagement',
-    name: '投后管理',
+    name: 'postInvestmentManagement',
     meta: {
       icon: 'md-menu',
       title: '投后管理'
@@ -438,7 +449,7 @@ export default [
     children: [
       {
         path: 'approveOrder',
-        name: '订单审批',
+        name: 'approveOrder',
         meta: {
           icon: 'md-funnel',
           title: '订单审批',
@@ -448,7 +459,7 @@ export default [
       },
       {
         path: 'approveCollectionOfPayment',
-        name: '回款审批',
+        name: 'approveCollectionOfPayment',
         meta: {
           icon: 'md-funnel',
           title: '回款审批',
@@ -458,7 +469,7 @@ export default [
       },
       {
         path: 'approveRefund',
-        name: '退款审批',
+        name: 'approveRefund',
         meta: {
           icon: 'md-funnel',
           title: '退款审批',
@@ -468,7 +479,7 @@ export default [
       },
       {
         path: 'approveReimburse',
-        name: '报销审批',
+        name: 'approveReimburse',
         meta: {
           icon: 'md-funnel',
           title: '报销审批',
@@ -478,7 +489,7 @@ export default [
       },
       {
         path: 'approveLeave',
-        name: '请假审批',
+        name: 'approveLeave',
         meta: {
           icon: 'md-funnel',
           title: '请假审批',
@@ -488,7 +499,7 @@ export default [
       },
       {
         path: 'approveTravelling',
-        name: '出差审批',
+        name: 'approveTravelling',
         meta: {
           icon: 'md-funnel',
           title: '出差审批',
@@ -498,7 +509,7 @@ export default [
       },
       {
         path: 'approveBorrowing',
-        name: '借款审批',
+        name: 'approveBorrowing',
         meta: {
           icon: 'md-funnel',
           title: '借款审批',
@@ -508,7 +519,7 @@ export default [
       },
       {
         path: 'approveAsk',
-        name: '请示审批',
+        name: 'approveAsk',
         meta: {
           icon: 'md-funnel',
           title: '请示审批',
@@ -518,7 +529,7 @@ export default [
       },
       {
         path: 'approveVisiting',
-        name: '拜访审批',
+        name: 'approveVisiting',
         meta: {
           icon: 'md-funnel',
           title: '拜访审批',
@@ -530,7 +541,7 @@ export default [
   },
   {
     path: '/financeManagement',
-    name: '财务管理',
+    name: 'financeManagement',
     meta: {
       icon: 'md-menu',
       title: '财务管理',
@@ -541,7 +552,7 @@ export default [
     children: [
       {
         path: 'progressSale',
-        name: '销售过程统计',
+        name: 'progressSale',
         meta: {
           icon: 'md-funnel',
           title: '销售过程统计',
@@ -551,7 +562,7 @@ export default [
         children: [
           {
             path: 'forecast',
-            name: '销售预测分析',
+            name: 'forecast',
             meta: {
               icon: 'md-funnel',
               title: '销售预测分析'
@@ -560,7 +571,7 @@ export default [
           },
           {
             path: 'funnel',
-            name: '销售漏斗分析',
+            name: 'funnel',
             meta: {
               icon: 'md-funnel',
               title: '销售漏斗分析'
@@ -569,7 +580,7 @@ export default [
           },
           {
             path: 'newMissionCollect',
-            name: '业务新增汇总',
+            name: 'newMissionCollect',
             meta: {
               icon: 'md-funnel',
               title: '业务新增汇总'
@@ -578,7 +589,7 @@ export default [
           },
           {
             path: 'followRecord',
-            name: '跟进记录汇总',
+            name: 'followRecord',
             meta: {
               icon: 'md-funnel',
               title: '跟进记录汇总'
@@ -587,7 +598,7 @@ export default [
           },
           {
             path: 'synthesis',
-            name: '业务综合统计',
+            name: 'synthesis',
             meta: {
               icon: 'md-funnel',
               title: '业务综合统计'
@@ -596,7 +607,7 @@ export default [
           },
           {
             path: 'grow',
-            name: '业务增长统计',
+            name: 'grow',
             meta: {
               icon: 'md-funnel',
               title: '业务增长统计'
@@ -607,7 +618,7 @@ export default [
       },
       {
         path: 'achievementSale',
-        name: '销售业绩统计',
+        name: 'achievementSale',
         meta: {
           icon: 'md-funnel',
           title: '销售业绩统计',
@@ -617,7 +628,7 @@ export default [
         children: [
           {
             path: 'targetProgress',
-            name: '业绩目标完成度',
+            name: 'targetProgress',
             meta: {
               icon: 'md-funnel',
               title: '业绩目标完成度'
@@ -626,7 +637,7 @@ export default [
           },
           {
             path: 'businessDealCollect',
-            name: '成交商机汇总',
+            name: 'businessDealCollect',
             meta: {
               icon: 'md-funnel',
               title: '成交商机汇总'
@@ -635,7 +646,7 @@ export default [
           },
           {
             path: 'collectionOfPaymentPlanCollect',
-            name: '回款计划汇总',
+            name: 'collectionOfPaymentPlanCollect',
             meta: {
               icon: 'md-funnel',
               title: '回款计划汇总'
@@ -644,7 +655,7 @@ export default [
           },
           {
             path: 'productSaleCollect',
-            name: '产品销量汇总',
+            name: 'productSaleCollect',
             meta: {
               icon: 'md-funnel',
               title: '产品销量汇总'
@@ -653,7 +664,7 @@ export default [
           },
           {
             path: 'financeAnalyze',
-            name: '财务数据分析',
+            name: 'financeAnalyze',
             meta: {
               icon: 'md-funnel',
               title: '财务数据分析'
@@ -664,7 +675,7 @@ export default [
       },
       {
         path: 'saleRank',
-        name: '销售排名统计',
+        name: 'saleRank',
         meta: {
           icon: 'md-funnel',
           title: '销售排名统计',
@@ -674,7 +685,7 @@ export default [
         children: [
           {
             path: 'targetProgressRank',
-            name: '业绩完成度排名',
+            name: 'targetProgressRank',
             meta: {
               icon: 'md-funnel',
               title: '业绩完成度排名'
@@ -683,7 +694,7 @@ export default [
           },
           {
             path: 'businessNewRank',
-            name: '业务新增排名',
+            name: 'businessNewRank',
             meta: {
               icon: 'md-funnel',
               title: '业务新增排名'
@@ -692,7 +703,7 @@ export default [
           },
           {
             path: 'bussinessDealRank',
-            name: '成交数据排名',
+            name: 'bussinessDealRank',
             meta: {
               icon: 'md-funnel',
               title: '成交数据排名'
@@ -701,7 +712,7 @@ export default [
           },
           {
             path: 'collectionOfPaymentRank',
-            name: '回款数据排名',
+            name: 'collectionOfPaymentRank',
             meta: {
               icon: 'md-funnel',
               title: '回款数据排名'
@@ -710,7 +721,7 @@ export default [
           },
           {
             path: 'conversionRateRank',
-            name: '转化率排名',
+            name: 'conversionRateRank',
             meta: {
               icon: 'md-funnel',
               title: '转化率排名'
@@ -723,7 +734,7 @@ export default [
   },
   {
     path: '/synthesisManagement',
-    name: '综合管理',
+    name: 'synthesisManagement',
     meta: {
       icon: 'md-menu',
       title: '综合管理'
@@ -732,7 +743,7 @@ export default [
     children: [
       {
         path: 'ticketAll',
-        name: '全部工单',
+        name: 'ticketAll',
         meta: {
           icon: 'md-funnel',
           title: '全部工单',
@@ -742,7 +753,7 @@ export default [
       },
       {
         path: 'ticketMine',
-        name: '我发起的',
+        name: 'ticketMine',
         meta: {
           icon: 'md-funnel',
           title: '我发起的',
@@ -752,7 +763,7 @@ export default [
       },
       {
         path: 'ticketResolve',
-        name: '我处理的',
+        name: 'ticketResolve',
         meta: {
           icon: 'md-funnel',
           title: '我处理的',
@@ -762,7 +773,7 @@ export default [
       },
       {
         path: 'ticketCC',
-        name: '抄送给我的',
+        name: 'ticketCC',
         meta: {
           icon: 'md-funnel',
           title: '抄送给我的',
@@ -774,7 +785,7 @@ export default [
   },
   {
     path: '/customerManagement',
-    name: '客户管理',
+    name: 'customerManagement',
     meta: {
       icon: 'md-menu',
       title: '客户管理'
@@ -783,7 +794,7 @@ export default [
     children: [
       {
         path: 'ticketAll',
-        name: '潜在客户库',
+        name: 'ticketAll',
         meta: {
           icon: 'md-funnel',
           title: '潜在客户库',
@@ -793,7 +804,7 @@ export default [
       },
       {
         path: 'ticketMine',
-        name: '已投客户库',
+        name: 'ticketMine',
         meta: {
           icon: 'md-funnel',
           title: '已投客户库',
@@ -803,7 +814,7 @@ export default [
       },
       {
         path: 'ticketResolve',
-        name: '合作客户库',
+        name: 'ticketResolve',
         meta: {
           icon: 'md-funnel',
           title: '合作客户库',
