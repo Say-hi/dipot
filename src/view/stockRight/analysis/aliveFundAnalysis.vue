@@ -34,6 +34,11 @@
           <div>{{ row.useMoney }}</div>
         </template>
       </Table>
+      <div class='tac p10 bgeee bd2' style='border-bottom-color: #001529；'>
+        <span>
+          展开<Icon type="ios-arrow-round-down" />
+        </span>
+      </div>
     </div>
   </div>
 </template>
