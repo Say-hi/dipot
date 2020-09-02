@@ -8,54 +8,22 @@
       @click='tabChoose(item)'
     >
       <span class='ti-title'>{{ item.title }}</span>
-      <span class='ti-count'>{{ item.count }}</span>
+      <count-to class='ti-count' :end='+item.count' />
     </div>
   </div>
 </template>
 
 <script>
+import CountTo from '@/components/count-to/index'
 export default {
   name: 'Tab',
+  components: {
+    CountTo
+  },
   props: {
     tabs: {
       type: Array,
-      default: () => ([
-        {
-          title: '代办',
-          count: '123',
-          type: 1
-        },
-        {
-          title: '已办未完结',
-          count: '123',
-          type: 2
-        },
-        {
-          title: '已完结',
-          count: '123',
-          type: 3
-        },
-        {
-          title: '发起未完结',
-          count: '123',
-          type: 4
-        },
-        {
-          title: '发起已完结',
-          count: '123',
-          type: 5
-        },
-        {
-          title: '知会',
-          count: '123',
-          type: 6
-        },
-        {
-          title: '全部任务',
-          count: '123',
-          type: 7
-        }
-      ])
+      default: () => ([])
     },
     outClick: {
       type: Function,
@@ -94,6 +62,7 @@ export default {
   padding-bottom: 0;
   transition: all 0.3s;
   border-bottom: 2px solid #fff;
+  cursor: pointer;
   &.active {
     border-bottom-color: rgb(157, 154, 154);
     color: $mainColor;

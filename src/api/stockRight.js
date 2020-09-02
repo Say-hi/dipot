@@ -6,3 +6,10 @@ export const getTabData = () => {
     method: 'post'
   })
 }
+
+export const getDepositoryTab = () => {
+  return axios.request({
+    url: '/stockright/depository/tab',
+    method: 'post'
+  })
+}

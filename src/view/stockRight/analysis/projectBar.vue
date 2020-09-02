@@ -9,7 +9,12 @@ export default {
   name: 'ProjectBar',
   props: {
     value: Array,
-    text: String
+    Y: Array,
+    text: String,
+    legend: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -19,81 +24,53 @@ export default {
   methods: {
     resize () {
       this.dom.resize()
+    },
+    init () {
+      this.$nextTick(() => {
+        let option = {
+          title: {
+            text: this.text,
+            x: 'center',
+            top: '0',
+            textStyle: {
+              fontSize: 22
+            }
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          grid: {
+            left: 30,
+            top: 30,
+            right: 60,
+            bottom: 40,
+            containLabel: true
+          },
+          legend: {
+            data: this.value.map(item => item.name),
+            bottom: 10,
+            show: this.legend
+          },
+          xAxis: {
+            position: 'top'
+          },
+          yAxis: {
+            type: 'category',
+            data: this.Y
+          },
+          series: this.value
+        }
+        !this.dom && (this.dom = echarts.init(this.$refs.dom))
+        this.dom.setOption(option)
+        !this.dom && on(window, 'resize', this.resize)
+      })
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      let option = {
-        title: {
-          text: this.text,
-          x: 'center',
-          top: '0',
-          textStyle: {
-            fontSize: 22
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          }
-        },
-        grid: {
-          left: 30,
-          top: 30,
-          right: 0,
-          bottom: 40,
-          containLabel: true
-        },
-        legend: {
-          data: this.value.map(item => item.name),
-          bottom: 10
-        },
-        xAxis: {
-          // show: false,
-          axisLabel: {
-            show: false
-          },
-          axisTick: {
-            show: false
-          },
-          splitLine: {
-            show: true
-          }
-        },
-        yAxis: {
-          type: 'category',
-          data: ['已入库', '已立项', '已过会', '已签约', '已投资', '退出中', '已退出', '其他']
-        },
-        series: [
-          {
-            name: '投资一部',
-            type: 'bar',
-            stack: '1',
-            data: [10, 20, 30]
-          },
-          {
-            name: '投资二部',
-            type: 'bar',
-            stack: '1',
-            data: [10, 20, 30]
-          },
-          {
-            name: '投资三部',
-            type: 'bar',
-            stack: '1',
-            data: [10, 20, 30],
-            label: {
-              show: true,
-              position: 'right'
-            }
-          }
-        ]
-      }
-      this.dom = echarts.init(this.$refs.dom)
-      this.dom.setOption(option)
-      on(window, 'resize', this.resize)
-    })
+    this.init()
   },
   beforeDestroy () {
     off(window, 'resize', this.resize)

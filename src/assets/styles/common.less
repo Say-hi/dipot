@@ -11,6 +11,9 @@
 .dfb {
   justify-content: space-between;
 }
+.dfbc {
+  justify-content: center;
+}
 
 .pr {
   position: relative;
@@ -49,11 +52,17 @@
 .p50 {
   padding: 5px 0;
 }
+.p510 {
+  padding: 5px 10px;
+}
 .bd1 {
   border-bottom: 1px solid #eee;
 }
 .bd2 {
   border-bottom: 2px solid #eee;
+}
+.border1 {
+  border: 1px solid #eee;
 }
 
 .bgeee {
@@ -62,6 +71,10 @@
 
 .tr5 {
   transition: all 0.5s;
+}
+
+.ccc {
+  color: #ccc;
 }
 
 
@@ -73,3 +86,12 @@
 }
 
 .fontSize(30);
+
+.br(@count) when (@count >= 5) {
+  .br@{count} {
+    border-radius: (1px * @count);
+  }
+  .br((@count - 1))
+}
+
+.br(10);

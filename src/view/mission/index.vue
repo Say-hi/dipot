@@ -1,6 +1,9 @@
 <template>
   <div class='mission-wrap'>
-    <tab :outClick='_tabClick'></tab>
+    <tab
+      :tabs='tabs'
+      :outClick='_tabClick'
+    ></tab>
     <search :disabled='disabled' :outClick='_searchClick' ref='search'></search>
     <page-tab
       v-model='disabled'
@@ -55,6 +58,8 @@
 </template>
 
 <script>
+import Tab from '@/components/tabs/index'
+import Search from './components/search'
 export default {
   name: 'Mission',
   data: () => ({
@@ -116,12 +121,49 @@ export default {
         align: 'center'
       }
     ],
+    tabs: [
+      {
+        title: '代办',
+        count: '123',
+        type: 1
+      },
+      {
+        title: '已办未完结',
+        count: '123',
+        type: 2
+      },
+      {
+        title: '已完结',
+        count: '123',
+        type: 3
+      },
+      {
+        title: '发起未完结',
+        count: '123',
+        type: 4
+      },
+      {
+        title: '发起已完结',
+        count: '123',
+        type: 5
+      },
+      {
+        title: '知会',
+        count: '123',
+        type: 6
+      },
+      {
+        title: '全部任务',
+        count: '123',
+        type: 7
+      }
+    ],
     pageData: '',
     disabled: true
   }),
   components: {
-    Tab: () => import('./components/tab.vue'),
-    Search: () => import('./components/search.vue')
+    Tab,
+    Search
   },
   methods: {
     _show (row) {

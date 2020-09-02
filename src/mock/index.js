@@ -32,6 +32,10 @@ Mock.mock(/\/mission\/progressDetail/, mission.getMissionProgressDetail)
 
 Mock.mock(/\/stockright\/tab/, stockRight.getTabData)
 Mock.mock(/\/stockRight\/analysis\/alivedata/, stockRight.getAliveAnalysis)
+Mock.mock(/\/stockRight\/analysis\/project/, stockRight.getProject)
+Mock.mock(/\/stockRight\/analysis\/distribution/, stockRight.getDistributionValue)
+Mock.mock(/\/stockright\/depository\/tab/, stockRight.getDepositoryTab)
+Mock.mock(/\/getDepositoryData/, stockRight.getDepositoryData)
 
 Mock.mock(/\/dashboard\/report/, dashboard.getDashboardReport)
 Mock.mock(/\/dashboard\/affairs/, dashboard.getDashboardAffairs)

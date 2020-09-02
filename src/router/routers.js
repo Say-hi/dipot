@@ -252,7 +252,18 @@ export default [
           title: '股权基金库',
           notCache: true
         },
-        component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+        component: () => import('@/view/stockRight/depository.vue')
+      },
+      {
+        path: 'fundDetail',
+        name: 'fundDetail',
+        meta: {
+          icon: 'md-funnel',
+          title: '股权基金详情',
+          hideInMenu: true,
+          notCache: true
+        },
+        component: () => import('@/view/stockRight/fundDetail.vue')
       },
       {
         path: 'projectBank',

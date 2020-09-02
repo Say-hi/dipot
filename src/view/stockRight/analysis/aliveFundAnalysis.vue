@@ -46,7 +46,7 @@
 <script>
 import { getAliveAnalysis } from '_api/analysis'
 export default {
-  name: 'aliveFundAnalysis',
+  name: 'AliveFundAnalysis',
   data () {
     return {
       columns: [

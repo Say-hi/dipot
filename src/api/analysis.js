@@ -7,3 +7,19 @@ export const getAliveAnalysis = (data) => {
     data
   })
 }
+
+export const getProject = (data) => {
+  return axios.request({
+    url: '/stockRight/analysis/project',
+    method: 'post',
+    data
+  })
+}
+
+export const getDistributionValue = (data) => {
+  return axios.request({
+    url: '/stockRight/analysis/distribution',
+    method: 'post',
+    data
+  })
+}
