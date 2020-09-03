@@ -36,6 +36,7 @@ Mock.mock(/\/stockRight\/analysis\/project/, stockRight.getProject)
 Mock.mock(/\/stockRight\/analysis\/distribution/, stockRight.getDistributionValue)
 Mock.mock(/\/stockright\/depository\/tab/, stockRight.getDepositoryTab)
 Mock.mock(/\/getDepositoryData/, stockRight.getDepositoryData)
+Mock.mock(/\/stockright\/dynamic/, stockRight.getDynamic)
 
 Mock.mock(/\/dashboard\/report/, dashboard.getDashboardReport)
 Mock.mock(/\/dashboard\/affairs/, dashboard.getDashboardAffairs)

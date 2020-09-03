@@ -4,7 +4,7 @@
       v-for='item in tabs'
       :key='item.typee'
       class='tabs-item dfc'
-      :class='{active: activeType === item.type}'
+      :class='{active: !onlyShow && activeType === item.type, showOnly: onlyShow}'
       @click='tabChoose(item)'
     >
       <span class='ti-title'>{{ item.title }}</span>
@@ -28,6 +28,10 @@ export default {
     outClick: {
       type: Function,
       default: function (item) {}
+    },
+    onlyShow: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -35,8 +39,10 @@ export default {
   }),
   methods: {
     tabChoose (item) {
-      this._click(item)
-      this.activeType = item.type
+      if (!this.onlyShow) {
+        this._click(item)
+        this.activeType = item.type
+      }
     },
     _click (item = this.tabs[0]) {
       this.outClick(item)
@@ -44,8 +50,10 @@ export default {
     }
   },
   mounted () {
-    this.activeType = this.tabs[0].type
-    this._click()
+    if (!this.onlyShow) {
+      this.activeType = this.tabs[0].type
+      this._click()
+    }
   }
 }
 </script>
@@ -63,6 +71,17 @@ export default {
   transition: all 0.3s;
   border-bottom: 2px solid #fff;
   cursor: pointer;
+  &.showOnly {
+    cursor: inherit;
+    border-right: 1px solid #eee;
+    &:nth-last-child(1) {
+      border-right: none;
+    }
+    &:hover {
+    background: inherit;
+    color: inherit;
+  }
+  }
   &.active {
     border-bottom-color: rgb(157, 154, 154);
     color: $mainColor;

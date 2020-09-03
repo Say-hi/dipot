@@ -16,6 +16,7 @@ import './index.less'
 import '@/assets/icons/iconfont.css'
 import TreeTable from 'tree-table-vue'
 import PageTab from './components/table-list/index.vue'
+import CountTo from './components/count-to/index'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 // 实际打包时应该不引入mock
@@ -49,6 +50,7 @@ Vue.directive('clickOutside', clickOutside)
  */
 
 Vue.component('PageTab', PageTab)
+Vue.component('CountTo', CountTo)
 
 /* eslint-disable no-new */
 new Vue({

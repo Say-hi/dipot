@@ -39,18 +39,6 @@
               style='margin-right: 5px'
               @click='_show(row)'
             >办理</Button>
-<!--          <Button-->
-<!--            type='error'-->
-<!--            size='small'-->
-<!--            style='margin-right: 5px'-->
-<!--            @click='_show(index)'-->
-<!--          >撤回</Button>-->
-<!--          <Button-->
-<!--            type='info'-->
-<!--            size='small'-->
-<!--            style='margin-right: 5px'-->
-<!--            @click='_show(index)'-->
-<!--          >重新发起</Button>-->
         </template>
       </Table>
     </page-tab>

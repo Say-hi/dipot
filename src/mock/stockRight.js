@@ -129,3 +129,29 @@ export const getDepositoryData = (req) => {
     pageSize: body.pageSize
   }
 }
+
+export const getDynamic = () => {
+  let data = []
+  function makeList () {
+    let list = []
+    doCustomTimes(Random.natural(1, 5), () => {
+      list.push(Mock.mock({
+        id: '@id',
+        time: '@time',
+        avatar: Random.dataImage('50x50', '头像'),
+        name: '@cname',
+        title: '@ctitle',
+        content: '@cparagraph(1, 10)'
+      }))
+    })
+    return list
+  }
+  doCustomTimes(10, () => {
+    data.push(Mock.mock({
+      id: '@id',
+      time: '@date',
+      list: makeList()
+    }))
+  })
+  return data
+}

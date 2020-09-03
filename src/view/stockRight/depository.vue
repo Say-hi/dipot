@@ -7,6 +7,7 @@
     />
     <Search
       :disabled='disabled'
+      :outClick='_searchClick'
     />
     <page-tab
       v-model='disabled'

@@ -15,7 +15,7 @@
       style='justify-content: center;'
     >
       <Page
-        v-if='pageData.totalNum / pageData.pageSize > 1'
+        v-if='pageData.totalNum / pageData.pageSize > 1 && !noPage'
         class='mt10'
         :total='pageData.totalNum'
         size='small'
@@ -64,6 +64,10 @@ export default {
     pageControl: {
       type: String,
       default: 'normal'
+    },
+    noPage: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

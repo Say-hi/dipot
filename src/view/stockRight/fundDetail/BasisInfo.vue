@@ -39,21 +39,38 @@
         </Dropdown>
       </div>
     </div>
+    <div class='border1 br5 p10 mt10'>
+      <Tabs
+        v-if='tabs'
+        :tabs='tabs'
+        :onlyShow='true'
+        class='mt10'
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import Tabs from '@/components/tabs/index'
 import Status from './Status'
 import { dropDown } from './config'
+import { getDepositoryTab } from '_api/stockRight'
 export default {
   name: 'BasisInfo',
   components: {
-    Status
+    Status,
+    Tabs
   },
   data () {
     return {
-      dropDown
+      dropDown,
+      tabs: []
     }
+  },
+  beforeMount () {
+    getDepositoryTab().then(res => {
+      this.tabs = res.data
+    })
   }
 }
 </script>
